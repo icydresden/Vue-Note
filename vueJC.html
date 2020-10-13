@@ -8,7 +8,7 @@
     <style>
         .active{
             border: 1px solid red;
-        }
+        } 
     </style>
 </head>
 <body>
@@ -60,10 +60,14 @@
             <!-- 第三种方式 -->
             xx:{{ item.name }}
         </li>
-        
+        <input type="button" value="diandian" @click="showIt(996,'laoTie')">
+        <input type="text" name="" @keyup.enter="sayHi">
+        <input type="text" v-model="message" @keyup.enter="getMessage">
+        {{ message}}
     </div>
 
     <div id="mask">
+        <h2 class="title">
         <div class="center">
             <h2 class="title">
                 <img src="./fotos/logo.webp" width="50px" alt="">
@@ -73,7 +77,7 @@
 
             
             <!-- left arrow -->
-            <a href="javascript:void(0)" class="left" @click="prev" > 
+            <a href="javascript:voidtext(0)" class="left" @click="prev" > 
                 <img src="./fotos/left.png" v-show="index!=0" width="20px" alt="" >
             </a>
             <!-- Picture -->
@@ -81,7 +85,9 @@
             <!-- right arrow -->
             <a href="javascript:void(0)" class="right" @click="next">
                 <img src="./fotos/right.png" v-show="index < imgArr.length-1" width="20px" alt="" >
-            </a>  
+            </a> 
+            
+            
         </div>
     </div>
 
@@ -99,6 +105,7 @@
                     // content:"HeiMa",
                     // content1:"<a href='http://www.google.com'>haha</a>",
                     food:"HAHAH",
+                    message:"ööööööö",
                     num:0,
                     isShow:false,
                     // imgSrc:"http://www.itheima.com/images/logo.png",
@@ -144,12 +151,22 @@
                     toggleActive:function(){
                         this.isActive=!this.isActive;
                     },
-
+                   
                     adddish:function(){
                         this.vegetables.push({name:"花菜"});
-                    },
+                    }, 
                     removedish:function(){
                         this.vegetables.shift();
+                    },
+                    showIt:function(p1,p2){
+                        console.log("show It!");
+                        console.log(p2);
+                    },
+                    sayHi:function(){
+                        alert("chi le mei!");
+                    },
+                    getMessage:function(){
+                        alert(this.message);
                     }
                 }
         })
