@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue</title>
+    <style>
+        .active{
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+
+        <!-- <p v-html="content">Web</p> -->
+        <!-- <p v-html="content1">Web1</p> -->
+        <!-- <input type="button" value="v-on Command" v-on:click="doIt"> -->
+        <!-- <input type="button" value="v-on Short" @click="doEdge"> -->
+        <!-- <input type="button" value="v-on " @dbclick="doHaochi"> -->
+        <h4 @click="doHaochi">{{ food }}</h4>
+        
+        <!-- <img v-show="isShow or num>5" src="http://www.itheima.com/images/logo.png" alt="" /> -->
+        
+        <!-- <img v-bind:src="imgSrc" alt=""> -->
+        <br>
+        <!-- <img :src="imgSrc" width="200px" alt="" :title="imgTitle"> -->
+        <!-- <img v-show="isShow" :src="imgSrc" width="200px" alt="" :title="imgTitle" > -->
+        <img v-show="isShow" :src="imgSrc" width="200px" alt="">
+        <img v-show="isShow" :src="imgSrc" width="200px" alt="" :title="xevweewv" :class="isActive?'active':''" @click="toggleActive">
+         <!-- .class Object Format is better than -->
+        <img v-show="isShow" :src="imgSrc" width="200px" alt="" :title="xevweewv" :class="{active:isActive}" @click="toggleActive">
+        <br>
+        
+        <input type="button" value="ShowOrHidePic.." @click="changeIsShow">
+
+        <button @click="sub">-</button>
+        <span>{{ num }}</span>
+        <button @click="add">+</button>
+        <br>
+
+        <p v-if="isShow">  Hei Hei is here!</p>
+
+        <ul>
+            <li v-for="(item,index) in arr">
+                <!-- 第一种方式 -->
+                <!-- HH: {{item}} -->
+
+                <!-- 第二种方式 item是数组中的数据， index是0~5 -->
+                {{index +1 }} HH: {{item}}
+                
+            </li>
+            
+        </ul>
+        <!-- <input type="button" value="add vegetable" @click="adddish"> -->
+        <!-- <input type="button" value="remove vegetable" @click="removedish"> -->
+
+        <li v-for="item in vegetables" v-bind:title="item.name">
+            <!-- 第三种方式 -->
+            xx:{{ item.name }}
+        </li>
+        
+    </div>
+
+    <div id="mask">
+        <div class="center">
+            <h2 class="title">
+                <img src="./fotos/logo.webp" width="50px" alt="">
+                <br>
+                Aaden Technology
+            </h2>
+
+            
+            <!-- left arrow -->
+            <a href="javascript:void(0)" class="left" @click="prev" > 
+                <img src="./fotos/left.png" v-show="index!=0" width="20px" alt="" >
+            </a>
+            <!-- Picture -->
+            <img :src="imgArr[index]" width="200px" height="140px" alt="">
+            <!-- right arrow -->
+            <a href="javascript:void(0)" class="right" @click="next">
+                <img src="./fotos/right.png" v-show="index < imgArr.length-1" width="20px" alt="" >
+            </a>  
+        </div>
+    </div>
+
+    
+
+    <!-- 开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <script>
+        var app = new Vue({
+                
+                el:"#app",
+
+                data:{
+                    // content:"HeiMa",
+                    // content1:"<a href='http://www.google.com'>haha</a>",
+                    food:"HAHAH",
+                    num:0,
+                    isShow:false,
+                    // imgSrc:"http://www.itheima.com/images/logo.png",
+                    imgSrc:"https://miro.medium.com/max/1000/1*qyAOepULOa_kVehhEIySKA.jpeg",
+                    imgTitle:"xxxxx",
+                    isActive:false,
+                    arr:["Beijing","Shanghai","HangZhou","Shenzhen","Tokey","NewYork","Paris"],
+                    vegetables:[
+                        {name:"xlh"},
+                        {name:"xxxv"}
+                    ]
+                },
+
+                methods:{
+                    changeIsShow:function(){
+                        // panduan
+                        // this.isShow = (!this.isShow) && (num>5);
+                        this.isShow = !this.isShow;
+                    },
+                    doIt:function(){
+                        alert('Do IT');
+                    },
+                    doEdge:function(){
+                        alert('Gjiao Gong')
+                    },
+                    doHaochi:function(){
+                        this.food+="Yami Yami"
+                    },
+                    add:function(){
+                        if(this.num>=10) 
+                            alert("You add too much")
+                        else
+                            this.num++;
+                    },
+
+                    sub:function(){
+                        if(this.num <=0)
+                            alert("You have too less")
+                        else
+                            this.num--;
+                    },
+
+                    toggleActive:function(){
+                        this.isActive=!this.isActive;
+                    },
+
+                    adddish:function(){
+                        this.vegetables.push({name:"花菜"});
+                    },
+                    removedish:function(){
+                        this.vegetables.shift();
+                    }
+                }
+        })
+
+
+    </script>
+
+    <script>
+        var app = new Vue({
+            el:"#mask",
+            data:{
+                imgArr:[
+                "./fotos/cat_1.jpeg",
+                "./fotos/cat_2.jpeg",
+                "./fotos/cat_3.jpeg",
+                "./fotos/cat_4.jpeg",
+                "./fotos/cat_5.jpeg",
+                "./fotos/cat_6.jpeg",
+                "./fotos/cat_7.jpeg",
+                // "./fotos/cat_8.jpeg",
+                // "./fotos/cat_9.jpeg",
+                // "./fotos/cat_10.jpeg",
+                    
+                ],
+                index:0,
+                arr:["Beijing","ShangHai","Tokey","NewYork"]
+
+            },
+            methods:{
+                prev:function(){
+                    this.index--;
+                },
+                next:function(){
+                    this.index++;
+                }
+            }
+        })
+    </script>
+    </body>
